@@ -6,29 +6,20 @@
 struct Node{
     int value;
     struct Node* next;
-    struct Node* previous;
 };
-void append(struct Node **head_ref, float new_data){
+void append(struct Node *head, float value){
+	if (head->next){
+		append(head->next,value);
+	}
 	struct Node *new_node = (struct Node*)malloc(sizeof(struct Node));
-	struct Node *last = *head_ref;
-	
-	new_node->data = new_data;
-	
-	new_node->next = NULL;
-	
-	if (*head_ref == NULL){
-		new_node->previous = NULL;
-		*head_ref=new_node;
-		return;
+	head->next=new_node;
+	new_node->value=value;
+}
+void printList(struct Node *head){
+	if(head->next){
+		printList(head->next);
+		printf(" %d ", head->value);
 	}
-	
-	while (last->next != NULL){
-		last = last->next;
-	}
-	
-	last->next = new_node;
-	new_node->previous = last;
-	tail=new_node;
-	return;
+	return
 }
 #endif
