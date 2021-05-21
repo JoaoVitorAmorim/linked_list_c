@@ -7,19 +7,49 @@ struct Node{
     int value;
     struct Node* next;
 };
-void append(struct Node *head, float value){
-	if (head->next){
-		append(head->next,value);
-	}
-	struct Node *new_node = (struct Node*)malloc(sizeof(struct Node));
-	head->next=new_node;
-	new_node->value=value;
+
+struct Node *newList(int value){
+  struct Node *node= (struct Node *)malloc(sizeof(struct Node));
+  node->value=value;
+  node->next=NULL;
+  return node;
 }
-void printList(struct Node *head){
-	if(head->next){
-		printList(head->next);
-		printf(" %d ", head->value);
-	}
-	return
+
+void append(struct Node *head, int value)
+{
+  if (head->next){
+    append(head->next, value);
+  }
+  else{
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+	head->next = new_node;
+    new_node->value = value;
+    new_node->next = NULL;
+    
+  }
 }
+void reverseList(struct Node **node){
+
+
+	struct Node *current = *node;
+	struct Node *prev = NULL;
+	struct Node *next = NULL;
+
+	while(current!=NULL){
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	*node=prev;
+	
+}
+
+void printList(struct Node *node){
+	printf(" %d ",node->value);
+	if(node->next){
+		printList(node->next);
+	}
+}
+
 #endif
