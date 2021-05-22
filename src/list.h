@@ -28,10 +28,10 @@ void append(struct Node *head, int value)
     
   }
 }
-void reverseList(struct Node **node){
+void reverseList(struct Node **head){
 
 
-	struct Node *current = *node;
+	struct Node *current = *head;
 	struct Node *prev = NULL;
 	struct Node *next = NULL;
 
@@ -41,7 +41,7 @@ void reverseList(struct Node **node){
 		prev = current;
 		current = next;
 	}
-	*node=prev;
+	*head=prev;
 	
 }
 
